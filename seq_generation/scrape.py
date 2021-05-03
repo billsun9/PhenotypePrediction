@@ -1,24 +1,38 @@
+"""
+Created on May 3 2021
+@author: Jay Ram
+"""
+
 import requests
 import urllib.request
 from bs4 import BeautifulSoup
 import pandas as pd
+import csv
+
+def csvprint(table):
+    table.to_csv('file.csv')
 
 def scrape(url):
     try:
-        res = requests.get(url)
-        res.raise_for_status()
-        soup = BeautifulSoup(res.content, 'html.parser')
+      
+        table = pd.DataFrame()
         
-        # STILL WIP
-        table = soup.find('tbody', {"id": "all_results"})
-# =============================================================================
-#         closing_tags = table.find_all(["p","table","h2","h3"])[::-1][:3]
-#         for closing_tag in closing_tags:
-#             closing_tag.decompose()
-#         toc = table.find("div", {"id": "toc"})
-#         if toc:
-#             toc.decompose()
-# =============================================================================
+        for i in range(36):
+            purl = url + "?page=" + str(i)
+            print(purl)
+            r = requests.get(purl)
+            df_list = pd.read_html(r.text) # this parses all the tables in webpages to a list
+            df = df_list[0]
+            
+            print(type(df))
+            print(df.shape)
+          
+            if(i == 0):
+                table = df
+            else:
+                table = pd.concat([table,df[1:]],ignore_index=True)
+            print(table.shape)
+            
         return table
         
     except requests.exceptions.HTTPError as http_err:
@@ -30,6 +44,7 @@ def scrape(url):
 
 url = 'http://synergistic.aging-research.group/roundworm/'
 
-page = scrape(url)
+table = scrape(url)
 # %%
-print(page.find('tr').prettify())
+print(table)
+csvprint(table)
