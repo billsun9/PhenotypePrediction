@@ -20,3 +20,8 @@ see seq_generation/
 - [ ] scrape [SynergyAge](http://synergistic.aging-research.group/roundworm/) for gene-lifespan change pairs
 - [ ] process data? (Inconsistencies in temp; change in lifespan metrics; epistasis)
 - [ ] make baseline feedforward nn
+
+###### timeline for synergistic.aging-research data (knockout)
+
+5/8/21 - have first model for prediction
+5/13/21 - have list of knockout canndidiates from site data
