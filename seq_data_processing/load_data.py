@@ -56,3 +56,47 @@ out1 = onehot_encode_seq_tf(seq1)
 out2 = onehot_encode_seq_tf(seq2)
 out3 = onehot_encode_seq_tf(seq3)
 # %%
+# encode gene seq (e.g. aak-1) to a vector repr
+# str to tf.tensor
+import pandas as pd
+import re
+import pickle
+
+# takes fp to dataset csv with 'Gene(s)' column, returns dict mapping gene to int
+def gene_to_int_map(path):
+    clean_sa_ds = pd.read_csv(path)
+    d, idx = {}, 0
+    for cur_genes in list(set(list(clean_sa_ds['Gene(s)']))):
+        cur_genes = cur_genes.replace(" ","")
+        genes = re.split(";|,",cur_genes)
+        for gene in genes:
+            if gene not in d:
+                d[gene] = idx
+                idx += 1
+    return d
+
+# save dict to pickle (because sets maybe? dont preserve relative ordering)
+path = "../data/SynergyAge_DS/Cleaned_SynergyAge_Database.csv"
+with open('./synergyage_gene_to_int_map.pickle', 'wb') as handle:
+    pickle.dump(gene_to_int_map(path), handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+def genes_to_vec_tf(input_genes): # e.g. "sod-2;eat-2" --> tf.tensor([1,1,1,1,0,1,...])
+    with open('./synergyage_gene_to_int_map.pickle', 'rb') as handle:
+        alphabet = pickle.load(handle)
+    cur_genes = input_genes.replace(" ","")
+    genes = re.split(";|,",cur_genes)
+    indices = [alphabet[ch] for ch in genes]
+    vec = tf.constant([1 if i not in indices else 0 for i in range(len(alphabet.keys()))],
+                      dtype='int32')
+    return vec
+
+
+
+# %%
+synergy_age_ds = pd.read_csv(path);
+synergy_age_ds_genes = synergy_age_ds['Gene(s)']
+synergy_age_ds_genes = list(set(list(synergy_age_ds_genes)))
+for i in range(100,110):
+    
+    vec_repr = genes_to_vec_tf(synergy_age_ds_genes[i])
+    print(synergy_age_ds_genes[i]+'--->'+str(vec_repr.numpy()))

@@ -6,7 +6,9 @@ see seq_data_processing/
 
 ###### includes...
 - [ ] seqio loading (faster?)
-- [x] nucleotide seq to tensor via 1-hot (use tf v instead of sklearn v)
+- [x] nucleotide seq (ATCG) to tensor via one-hot (use tf v instead of sklearn v)
+- [x] gene seq to 1-d vec (use tf v)
+- [x] cleaned synergyage data --> `./data/SynergyAge_DS/Cleaned_SynergyAge_Database.csv`
 
 ###### todo...
 
@@ -14,14 +16,8 @@ see seq_data_processing/
 see seq_generation/
 
 ###### includes...
-- [x] boilerplate scrape code
+- [ ] Janggu lib testing
 
 ###### todo...
-- [ ] scrape [SynergyAge](http://synergistic.aging-research.group/roundworm/) for gene-lifespan change pairs
-- [ ] process data? (Inconsistencies in temp; change in lifespan metrics; epistasis)
 - [ ] make baseline feedforward nn
-
-###### timeline for synergistic.aging-research data (knockout)
-
-5/8/21 - have first model for prediction
-5/13/21 - have list of knockout canndidiates from site data
+- [ ] explore CGR cnn-based model

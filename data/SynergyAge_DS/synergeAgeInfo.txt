@@ -1,0 +1,31 @@
+Release date: April 2020
+
+Number of gene combinations: 1833
+
+The SQL tables and the JSON file have the following information and structure:
+
+Table (models): each row represents a cohort for a mutant (or for wild type)
+
+Table fields:
+
+id - an unique ID for the mutant
+tax_id - NCBI taxon ID
+name - mutant name
+genes - the genes that were genetically modulated
+temp - the temperature at which the experiment was carried out
+lifespan - the mean lifespan of the cohort
+pmid - PubMed ID of the paper describing the results
+effect - the percentage by which lifespan was increased, compared to the wild type in the same experiment, where available
+details - a short description of the methodology used in the paper
+diet - the diet under which animals were kept
+interaction_type - the type of epistasis interaction, automatically catalogued based on the definitions/methods described in Bunu et al., 2020
+strain - [for Drosophila melanogaster only] the strain name for the n-mutant, as it appears in the referenced paper
+Table (model_interactions): each row represents a SynergyAge transition from an n-mutant to the corresponding (n+1)-mutant
+
+Table fields:
+
+id1 - id of the n-mutant (or wild type)
+id2 - id of the (n+1)-mutant
+phenotype_comparison - lifespan comparison between the phenotype of (n+1)-mutant and n-mutant
+
+In the CSV file, each row represents a comparison between wild type (where available), n-mutant, 1-mutant (where available) and (n+1)-mutant, with all the gene-centric information included within the row.
