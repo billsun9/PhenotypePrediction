@@ -51,3 +51,62 @@ clean_ds['Gene(s)'].describe()
 clean_ds['Gene(s)'].value_counts()
 clean_ds['Wild Lifespan'].describe()
 clean_ds['Mutant Lifespan'].describe()
+# %%
+gene_1_intervention = raw_ds['Intervention on gene 1']
+gene_1_intervention_counts = gene_1_intervention.value_counts()
+
+out_path_1 = '../data/SynergyAge_DS/gene_1_counts.csv'
+gene_1_intervention_counts.to_csv(out_path_1)
+
+# %%
+gene_2_3_intervention = raw_ds['Intervention(s) on gene 2(,3)']
+gene_2_3_intervention_counts = gene_2_3_intervention.value_counts()
+
+out_path_2 = '../data/SynergyAge_DS/gene_2_3_counts.csv'
+gene_2_3_intervention_counts.to_csv(out_path_2)
+# %%
+import re
+def interventions_clean_and_to_list(path, col_name):
+    clean_sa_ds = pd.read_csv(path)
+    l = []
+    for cur_genes in list(set(list(clean_sa_ds[str(col_name)]))):
+        cur_genes = cur_genes.replace(" ","")
+        genes = re.split(";|,",cur_genes)
+        for gene in genes:
+            if gene not in l:
+                l.append(gene)
+    return l
+
+
+gene_1_list = interventions_clean_and_to_list(path, col_name='Intervention on gene 1')
+gene_2_3_list = interventions_clean_and_to_list(path, col_name='Intervention(s) on gene 2(,3)')
+
+import pickle
+out_path_list_1 = 'data_analytics/intervention_gene_1_unique.pkl'
+out_path_list_2_3 = 'data_analytics/intervention_gene_2_3_unique.pkl'
+
+with open(out_path_list_1, 'wb') as f:
+    pickle.dump(gene_1_list, f)
+
+with open(out_path_list_2_3, 'wb') as f:
+    pickle.dump(gene_2_3_list, f)
+
+
+# to load...
+# import pickle
+# with open(out_path_list_1, 'rb') as f:
+#     gene_1_unique_interventions_list = pickle.load(f)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

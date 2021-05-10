@@ -14,9 +14,9 @@ see seq_data_processing/
 
 ## Knockout/Knockin Generation
 see seq_generation/
-
+training scripts in `./seq_generation/train`; WIP
 ###### includes...
-- [ ] Janggu lib testing
+- [x] Janggu lib testing --> kind of buggy and sometimes deprecated; dont recommend
 
 ###### todo...
 - [ ] make baseline feedforward nn
