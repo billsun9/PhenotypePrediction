@@ -1,3 +1,5 @@
 data/Example_Animal_Genomes/
 data/__MACOSX/
 nlp_reqs/
+.ipynb_checkpoints/
+**/__pycache__/
