@@ -77,3 +77,18 @@ def vec_to_genes_np(input_vec):
                 rtn.append(gene)
                 
     return ";".join(rtn)
+
+# %% interventions
+# 6/25/21
+# iterates through df[col_name] and return frequency of each intervention as dict
+def get_unique_interventions_and_count(df, col_name):
+    d = {}
+    for cur_interventions in list(df[str(col_name)]):
+        cur_interventions = cur_interventions.replace(" ","")
+        interventions = re.split(";|,",cur_interventions)
+        for intervention in interventions:
+            if intervention not in d:
+                d[intervention] = 1
+            else:
+                d[intervention] += 1
+    return d
