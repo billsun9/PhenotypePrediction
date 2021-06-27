@@ -84,6 +84,7 @@ def vec_to_genes_np(input_vec):
 def get_unique_interventions_and_count(df, col_name):
     d = {}
     for cur_interventions in list(df[str(col_name)]):
+        cur_interventions = cur_interventions.replace(u'\xa0', ' ') # gets rid of '\xa0' non-breaking space issue
         cur_interventions = cur_interventions.replace(" ","")
         interventions = re.split(";|,",cur_interventions)
         for intervention in interventions:

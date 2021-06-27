@@ -72,7 +72,8 @@ def clean_sa_dataset(dataset_path, save_path, ignore=['RNAi','OE']):
 
 # %%
 path = "../../data/SynergyAge_DS/SynergyAge_Database.csv"
-out_path = "../../data/SynergyAge_DS/interventions/sa_clean_interventions.csv"
+#out_path = "../../data/SynergyAge_DS/interventions/sa_clean_interventions.csv"
+out_path = "./tmp/clean_interventions_dataset.csv"
 sa_clean_interventions = clean_sa_dataset(path, out_path)
 # %%
 # get some nice analytics
@@ -87,6 +88,7 @@ sa_clean_interventions['Intervention(s)'].value_counts().reset_index().rename(
 def get_unique_interventions_and_count(df, col_name):
     d = {}
     for cur_interventions in list(df[str(col_name)]):
+        cur_interventions = cur_interventions.replace(u'\xa0', ' ') # gets rid of '\xa0' non-breaking space issue
         cur_interventions = cur_interventions.replace(" ","")
         interventions = re.split(";|,",cur_interventions)
         for intervention in interventions:
