@@ -1,5 +1,6 @@
-<h2 align="center">Phenotype Prediction</h2>
+<h2 align="center">Potpourri of ML Techniques applied to Genomic Sequence data (primarily  for protein functional fitness prediction)</h2>
 
+1) ML techniques to predict lifespan of c. elegans provided curated dataset of knockout/knockin mutations and wormbase information 2) ML techniques to predict channelrhodopsin expression and localization provided dataset of nucleotide sequences for protein variants (see `expression_localization_chrs`)
 
 ### Data
 see data/
