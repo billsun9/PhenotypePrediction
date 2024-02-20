@@ -1,0 +1,5 @@
+Relevant Papers for Data Analysis
+
+Structure-guided SCHEMA recombination generates diverse chimeric channelrhodopsins (PNAS 2017)
+Machine learning-guided channelrhodopsin engineering enables minimally invasive optogenetics (Nature 2019)
+ - https://docs.google.com/document/d/1ChcfnrXo-07HGWd3mhU3Tq5Cju0J5V8n8K-zOJGcKfI/edit?usp=sharing
