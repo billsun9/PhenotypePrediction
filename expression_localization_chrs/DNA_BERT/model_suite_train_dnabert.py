@@ -10,8 +10,6 @@ import sys
 
 from transformers import AutoTokenizer, AutoModel
 
-sys.path.insert(0, '/Users/tony_yu/PycharmProjects/ML4FG/MLFG-master')
-
 from dataloaders import get_dataloaders, constructVocab
 
 from DNA_BERT_models import *
